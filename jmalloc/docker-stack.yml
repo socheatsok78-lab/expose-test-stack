@@ -1,0 +1,21 @@
+services:
+  jmalloc-echo-server:
+    image: jmalloc/echo-server
+    networks:
+      jmalloc:
+
+  jmalloc-echo-expose:
+    image: socheatsok78/expose:main
+    command:
+      - share
+      - http://jmalloc-echo-server:8080
+    environment:
+      - EXPOSE_SERVER_DOMAIN
+      - EXPOSE_AUTH_TOKEN
+    networks:
+      jmalloc:
+    extra_hosts:
+      - "sharedwithexpose.localhost:host-gateway"
+
+networks:
+  jmalloc:

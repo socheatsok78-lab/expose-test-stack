@@ -1,0 +1,21 @@
+services:
+  ealen-echo-server:
+    image: ealen/echo-server
+    networks:
+      ealen:
+
+  ealen-echo-expose:
+    image: socheatsok78/expose:main
+    command:
+      - share
+      - http://ealen-echo-server
+    environment:
+      - EXPOSE_SERVER_DOMAIN
+      - EXPOSE_AUTH_TOKEN
+    networks:
+      ealen:
+    extra_hosts:
+      - "sharedwithexpose.localhost:host-gateway"
+
+networks:
+  ealen:
